@@ -1,0 +1,13 @@
+device(ai,INST_IO,devIsegHalAi,"isegHAL")
+device(ao,INST_IO,devIsegHalAo,"isegHAL")
+device(bi,INST_IO,devIsegHalBi,"isegHAL")
+device(bo,INST_IO,devIsegHalBo,"isegHAL")
+device(longin,INST_IO,devIsegHalLi,"isegHAL")
+device(longout,INST_IO,devIsegHalLo,"isegHAL")
+device(mbbiDirect,INST_IO,devIsegHalMbbid,"isegHAL")
+device(stringin,INST_IO,devIsegHalSi,"isegHAL")
+device(stringout,INST_IO,devIsegHalSo,"isegHAL")
+device(bo,INST_IO,devIsegHalGlobalSwitchBo,"isegHALglobal")
+
+registrar( "devIsegHalRegister" )
+

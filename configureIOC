@@ -1,0 +1,66 @@
+#!/bin/bash
+
+MAKEBASEAPP=`which makeBaseApp 2> /dev/null`
+if [ $? -ne 0 ] ; then
+  MAKEBASEAPP=`which makeBaseApp.pl 2> /dev/null`
+  if [ $? -ne 0 ] ; then
+    >&2 echo "ERROR: Cannot find makeBaseApp executable!"
+    exit 1;
+  fi
+fi
+
+## configure isegioc
+MODULE_PATH=/opt/epics/modules
+TOP=${PWD}/../tmp/isegioc
+ORIG=${PWD}
+IOC_NAME=isegIOC
+SYS_LIBS="isegHAL-client"
+
+mkdir -p $TOP
+(cd $TOP; $MAKEBASEAPP -t ioc ${IOC_NAME})
+
+## Add source files for isegHAL support
+IOC_SRC=`find ${ORIG}/src/ -name "*.c*" -exec basename "{}" \; | xargs echo`
+IOC_DBD=`find ${ORIG}/src/ -name "*.dbd" -exec basename "{}" \; | xargs echo`
+IOC_LIB=""
+cp -a ${ORIG}/src ${TOP}/${IOC_NAME}App/.
+
+## this requires base version 3.15.5
+sed -i -e "s|^#MODULES\s*=.*$|MODULES = ${MODULE_PATH}|" ${TOP}/configure/RELEASE
+
+## include AUTOSAVE module
+AS_PATH=`find $MODULE_PATH -iname "as.dbd" | grep -v src`
+if [ ! -z $AS_PATH ] ; then
+  echo "including AUTOSAVE support module"
+  AS_PATH=${AS_PATH#${MODULE_PATH}/}
+  AS_PATH=${AS_PATH%"/dbd/as.dbd"}
+  sed -i -e "/^#MYMODULE\s*=.*$/a AUTOSAVE = \${MODULES}/${AS_PATH}" ${TOP}/configure/RELEASE
+  IOC_DBD="${IOC_DBD} asSupport.dbd"
+  IOC_LIB="${IOC_LIB} autosave"
+fi
+  
+## include CALC module
+CALC_PATH=`find $MODULE_PATH -iname "calc.dbd" | grep -v src`
+if [ ! -z $CALC_PATH ] ; then
+  echo "including CALC support module"
+  CALC_PATH=${CALC_PATH#${MODULE_PATH}/}
+  CALC_PATH=${CALC_PATH%"/dbd/calc.dbd"}
+  sed -i -e "/^#MYMODULE\s*=.*$/a CALC = \${MODULES}/${CALC_PATH}" ${TOP}/configure/RELEASE
+  IOC_DBD="${IOC_DBD} calc.dbd"
+  IOC_LIB="${IOC_LIB} calc"
+fi
+
+sed -i \
+		-e "/${IOC_NAME}_SRCS += ${IOC_NAME}_registerRecordDeviceDriver.cpp/a ${IOC_NAME}_SRCS += $IOC_SRC" \
+		-e "/^#${IOC_NAME}_DBD += xxx.dbd/a ${IOC_NAME}_DBD += $IOC_DBD" \
+		-e "/^#${IOC_NAME}_LIBS += xxx/a ${IOC_NAME}_SYS_LIBS += $SYS_LIBS" \
+		-e "/^#${IOC_NAME}_LIBS += xxx/a ${IOC_NAME}_LIBS += $IOC_LIB" \
+		${TOP}/${IOC_NAME}App/src/Makefile
+
+IOC_DB=`find ${ORIG}/Db/ -name "*.db" -exec basename "{}" \; | xargs echo`
+cp -a ${ORIG}/Db ${TOP}/${IOC_NAME}App/.
+sed -i -e "/^#DB += xxx.db/a DB += $IOC_DB" ${TOP}/${IOC_NAME}App/Db/Makefile
+
+sed -e "s|<TOPDIR>|${TOP}|g" Makefile.in > ${ORIG}/Makefile
+
+

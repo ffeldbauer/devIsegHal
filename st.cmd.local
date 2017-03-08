@@ -1,0 +1,18 @@
+#!/opt/epics/tmp/isegioc/bin/linux-x86/isegIOC
+
+epicsEnvSet( "ARCH",                 "linux-x86" )
+epicsEnvSet( "TOP",                  "/opt/epics/isegioc" )
+epicsEnvSet( "EPICS_BASE",           "/opt/epics/base" )
+
+## Register all support components
+dbLoadDatabase( "$(TOP)/dbd/isegIOC.dbd", 0, 0 )
+isegIOC_registerRecordDeviceDriver( pdbbase )
+
+## Connect isegHalServer interface
+isegHalConnect( "can0", "can0" )
+
+## Load record instances
+dbLoadTemplate ("/PATH/TO/SUBFILE" )
+
+iocInit()
+

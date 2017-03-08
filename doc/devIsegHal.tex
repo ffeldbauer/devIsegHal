@@ -1,0 +1,157 @@
+\documentclass[a4paper,10pt]{scrartcl}
+%
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{color, xcolor, colortbl}
+\usepackage{listings}
+\usepackage{etoolbox}
+\usepackage[colorlinks,linkcolor = black,citecolor = black] {hyperref}
+\usepackage[final]{pdfpages}
+\usepackage[a4paper]{geometry}
+\usepackage[automark]{scrpage2}
+\usepackage{upquote}
+\pagestyle{scrheadings}
+\clearscrheadfoot
+%
+\setlength{\voffset}{-1.5cm}
+\setlength{\oddsidemargin}{-1.8cm}
+\setlength{\evensidemargin}{-1.8cm}
+\setlength{\textheight}{24cm}
+\setlength{\textwidth}{19.5cm}
+\setlength{\unitlength}{1.0cm}
+%
+\newbool{forLMD}
+\newbool{cross}
+\setbool{forLMD}{false}
+\setbool{cross}{false}
+%
+\definecolor{darkgray}{rgb}{0.8,0.8,0.8}
+\definecolor{darkgreen}{rgb}{0,.5,0}
+\definecolor{lightgray}{rgb}{0.95,0.95,0.95}
+%
+\lstset{ %
+  language=C,
+  basicstyle=\small\ttfamily,       % the size of the fonts that are used for the code
+  keywordstyle=\color{blue}\bfseries,
+  stringstyle=\color{darkgreen},%\ttfamily,
+  commentstyle=\color{red},
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\tiny,
+  stepnumber=5,
+  numbersep=5pt,
+  backgroundcolor=\color{lightgray},   % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  frame=single,                   % adds a frame around the code
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  title=\lstname,                 % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+  columns=flexible,
+  keepspaces=true,
+  morekeywords={record, field}
+}
+%
+\ihead[]{}                      %rechte Kopfzeile
+\chead[]{}                      %mittlere Kopfzeile
+\ohead[\pagemark]{\pagemark}    %linke Kopfzeile (Seitenzahl)
+\setheadsepline{.4pt}           %Trennlinie Kopfzeile-Text
+%
+\title{devIsegHal\\EPICS Device Support for\\ iseg Hardware Abstraction Layer}
+\author{F.~Feldbauer $<$feldbaue@kph.uni-mainz.de$>$}
+\date{\today}
+%
+\begin{document}
+%
+% * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+%
+\maketitle
+\tableofcontents 
+%
+% * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+%
+\section{Introduciton}
+The isegHAL library offers a string based application interface - API. The data
+collection from the iseg high voltage modules is done in background. All
+communication hand shake is handled by the isegHAL.\\
+This module offers EPICS device support routines to use the isegHAL library
+within your EPICS applicaitons.
+
+\section{Usage}
+\subsection{Connect to an interface with the isegHalServer}
+Before loading any records, devIsegHal has to connect to an interface
+with the isegHalServer daemon. This is done via the IOC shell command
+\begin{lstlisting}
+isegHalConnect( "NAME", "INTERFACE" )
+\end{lstlisting}
+NAME is a user defined name, which is internally used to address this interface
+while INTERFACE is the actual name of the hardware interface from your operating system
+(e.g. "can0" for a CAN interface)
+
+\subsection{Records}
+To make a record use devIsegHal, set its \lstinline|DTYP| field to "isegHAL".
+The \lstinline|INP| or \lstinline|OUT| link has the form "@OBJECT IF".
+Here OBJECT is a fully qualified object string for the item values
+provided by the isegHalServer and IF is the name of the interface as used with the 
+\lstinline|isegHalConnect| command mentioned above.\\
+isegHAL provides its own timestamp of the last change of a value (\lstinline|timeStampLastChanged|).
+To use this timestamp as timestamp of the record, the \lstinline|TSE| field has to be set to $-2$\\
+Example:
+\begin{lstlisting}
+record( ai, "ISEG:0:0:2:VoltageMeasure" ) {
+  field( DTYP, "isegHAL" )
+  field( INP,  "@0.0.2.VoltageMeasure can0" )
+  field( TSE,  "-2" )
+}
+\end{lstlisting}
+If the \lstinline|EGU| field is not set in the database, the unit-value from the
+corresponding IsegItemProperty is copied into this field during initialization.\\
+
+\section{Asynchronous Handling}
+It is possible that control parameters change during operation. For example, if a trip occures
+the corresponding \lstinline|setON| bit in the channel control register will be set to 0.
+These changes are monitored by devIsegHal through a polling thread.
+Each output record (execpt for stringout records) is automatically registered to this thread
+and their values are checked for updates on the isegHAL. If a value has changed
+the \lstinline|VAL| field and timestamp of the record will be set to the new values.\\
+Setting the \lstinline|SCAN| field of input records to \lstinline|I/O Intr| will also
+register these records for the thread monitoring the values in isegHAL.\\
+The thread goes through the list of registered records, checks each for an update, and
+then waits for 5 seconds. This waiting time can be modified using the IOC Shell Commands (c.f.~\ref{iocCmd}).
+
+\section{Supported Record Types}
+\begin{tabular}{|l|c|}
+\hline
+Record type & isegDataType \\ \hline
+ai/ao records & R4 \\
+bi/bo records & BOOL \\
+mbbiDirect records & UI1 \& UI4\\
+longin/longout records & UI1 \& UI4\\
+stringin/stringout records & STR\\
+\hline
+\end{tabular}
+
+{\em Note: the maximum string length for stringin/out records is limited to 40 characters while the maximal length for the value of an IsegItemValue is 200.
+Thus only the first 39 characters of the IsegItemValue are copied to record's VAL field (plus Null-Character for string termination).}
+
+\section{IOC Shell Commands}\label{iocCmd}
+Currently there is only on command callable from the IOC shell.
+\begin{lstlisting}
+devIsegHalSetOpt( "key", "value" )
+\end{lstlisting}
+\begin{tabular}{|l|l|c|}
+\hline
+Key & Meaning & Value \\ \hline
+Intervall & Change the intervall of the polling thread & a value of 0 means no pause between two iterations of the list \\
+LogLevel & Change log level of isegHalServer & see isegHal Manual \\
+\hline
+\end{tabular}
+
+\end{document}
+
