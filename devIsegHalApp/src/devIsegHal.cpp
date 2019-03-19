@@ -66,6 +66,27 @@
 static isegHalThread* myIsegHalThread = NULL;
 
 //_____ F U N C T I O N S ______________________________________________________
+double timespec_diff( const struct timespec * stop, const struct timespec * start )
+{
+  long	start_sec	= start->tv_sec;
+  long	start_nsec	= start->tv_nsec;
+
+  if ( stop->tv_nsec < start_nsec ) {
+    long	nSeconds = ( start_nsec - stop->tv_nsec ) / 1e9 + 1;
+    start_nsec -= 1e9 * nSeconds;
+    start_sec  += nSeconds;
+  }
+  if ( stop->tv_nsec - start_nsec > 1e9 ) {
+    long nSeconds = ( stop->tv_nsec - start_nsec) / 1e9;
+    start_nsec += 1e9 * nSeconds;
+    start_sec  -= nSeconds;
+  }
+
+  double	nSeconds = stop->tv_sec  - start_sec;
+  double	nNSec	 = stop->tv_nsec - start_nsec;
+
+  return nSeconds + ( nNSec / 1.0e9 );
+}
 
 //------------------------------------------------------------------------------
 //! @brief       D'tor of class isegHalConnectionHandler
@@ -567,8 +588,12 @@ void isegHalThread::run() {
     if( !_run ) continue;
 
     // some "benchmarking"
-    time_t start;
-    time(&start);
+    struct timespec	start;
+#ifdef _POSIX_CPUTIME
+	clock_gettime( CLOCK_PROCESS_CPUTIME_ID, &start );
+#else
+	clock_gettime( CLOCK_MONOTONIX, &start );
+#endif
 
     for( ; it != _recs.end(); ++it ) {
 
@@ -586,7 +611,7 @@ void isegHalThread::run() {
       time.nsec = microsecs * 100000;
       
       if( (*it)->time.secPastEpoch < time.secPastEpoch ) {
-        if( 1 <= _debug )
+        if( 2 <= _debug )
           printf( "isegHalThread::run: New value for item '%s': %s -> %s\n",
                   (*it)->object, (*it)->value, item.value );
         // value was updated in isegHAL
@@ -597,13 +622,17 @@ void isegHalThread::run() {
     }
 
     // some "benchmarking"
-    time_t stop;
-    time(&stop);
 
-    if( 2 <= _debug )
+    if( 1 <= _debug ) {
+      struct timespec	stop;
+#ifdef _POSIX_CPUTIME
+	  clock_gettime( CLOCK_PROCESS_CPUTIME_ID, &stop );
+#else
+	  clock_gettime( CLOCK_MONOTONIX, &stop );
+#endif
       printf( "isegHalThread::run: needed %lf seconds for %lu records\n",
-               difftime( stop, start ), (unsigned long)_recs.size() );
-
+               timespec_diff( &stop, &start ), (unsigned long)_recs.size() );
+	}
   }
 }
 
