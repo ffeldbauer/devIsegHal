@@ -685,7 +685,7 @@ extern "C" {
   //! PORT is the deviseg internal name of the interface connected to the isegHalServer,
   //! KEY is the name of the option and VALUE the new value for the option.
   //!
-  //! Possbile KEYs are:
+  //! Possible KEYs are:
   //! Intervall  -  set the wait time after going through the list of records with the polling thread
   //! LogLevel   -  Change loglevel of isegHalServer
   //! debug      -  Enable debug output of polling thread
@@ -694,9 +694,9 @@ extern "C" {
     // Set new intervall for polling thread
     if( strcmp( args[1].sval, "Intervall" ) == 0 ) {
       double newIntervall = 0.;
-      int n = sscanf( args[1].sval, "%lf", &newIntervall );
+      int n = sscanf( args[2].sval, "%lf", &newIntervall );
       if( 1 != n ) {
-        fprintf( stderr, "\033[31;1mInvalid value for key '%s': %s\033[0m\n", args[0].sval, args[1].sval );
+        fprintf( stderr, "\033[31;1mInvalid value for key '%s': %s\033[0m\n", args[1].sval, args[2].sval );
         return;
       }
       myIsegHalThread->changeIntervall( newIntervall );
@@ -705,17 +705,17 @@ extern "C" {
     // change log level from isegHAL server
     if( strcmp( args[1].sval, "LogLevel" ) == 0 ) {
       if( iseg_setItem( args[0].sval, "LogLevel", args[2].sval ) != ISEG_OK ) {
-        fprintf( stderr, "\033[31;1mCould not change loglevel to '%s'\033[0m\n", args[1].sval );
+        fprintf( stderr, "\033[31;1mCould not change LogLevel to '%s'\033[0m\n", args[2].sval );
         return;
       }
     }
 
     // Set new debug level
-    if( strcmp( args[0].sval, "debug" ) == 0 ) {
+    if( strcmp( args[1].sval, "debug" ) == 0 ) {
       unsigned newDbgLvl = 0;
-      int n = sscanf( args[1].sval, "%u", &newDbgLvl );
+      int n = sscanf( args[2].sval, "%u", &newDbgLvl );
       if( 1 != n ) {
-        fprintf( stderr, "\033[31;1mInvalid value for key '%s': %s\033[0m\n", args[0].sval, args[1].sval );
+        fprintf( stderr, "\033[31;1mInvalid value for key '%s': %s\033[0m\n", args[1].sval, args[2].sval );
         return;
       }
       myIsegHalThread->setDbgLvl( newDbgLvl );
