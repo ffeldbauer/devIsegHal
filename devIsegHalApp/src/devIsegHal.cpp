@@ -584,8 +584,9 @@ void isegHalThread::run() {
       epicsTimeStamp time;
       time.secPastEpoch = seconds - POSIX_TIME_AT_EPICS_EPOCH;
       time.nsec = microsecs * 100000;
-      
-      if( (*it)->time.secPastEpoch < time.secPastEpoch ) {
+
+      if(   (*it)->time.secPastEpoch != time.secPastEpoch
+        ||  (*it)->time.nsec         != time.nsec         ) {
         if( 1 <= _debug )
           printf( "isegHalThread::run: New value for item '%s': %s -> %s\n",
                   (*it)->object, (*it)->value, item.value );
