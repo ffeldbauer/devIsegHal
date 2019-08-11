@@ -56,7 +56,7 @@
 #include <recGbl.h>
 
 // local includes
-#include "devIsegHalClasses.h"
+#include "devIsegHalClasses.hpp"
 
 //_____ D E F I N I T I O N S __________________________________________________
 

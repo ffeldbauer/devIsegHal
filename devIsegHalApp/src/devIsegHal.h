@@ -49,8 +49,6 @@
 #define DO_NOT_CONVERT        2
 #define ERROR                 -1
 
-#define CHECK_LAST_REFRESHED
-
 typedef long (*DEVSUPINT)(dbCommon*, char* ); /**< internal device support function */
 
 /**
