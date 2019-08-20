@@ -5,6 +5,7 @@ include $(TOP)/configure/CONFIG
 #  ADD MACRO DEFINITIONS AFTER THIS LINE
 #=============================
 devIsegHal_SYS_LIBS += isegHAL-client
+isegIoc_SYS_LIBS += isegHAL-client
 
 ifneq ($(ISEGHAL),)
     USR_INCLUDES += -I$(ISEGHAL)
@@ -39,6 +40,43 @@ devIsegHal_SRCS += devIsegHalStringin.c
 devIsegHal_SRCS += devIsegHalStringout.c
 
 devIsegHal_LIBS += $(EPICS_BASE_IOC_LIBS)
+
+#===========================
+# build an ioc application
+PROD_IOC = isegIoc
+
+DBD += isegIoc.dbd
+
+isegIoc_DBD += base.dbd
+isegIoc_DBD += devIsegHal.dbd
+
+isegIoc_LIBS += devIsegHal
+
+ifneq ($(AUTOSAVE),)
+    isegIoc_DBD += as.dbd
+    isegIoc_LIBS += autosave
+endif
+ifneq ($(CALC),)
+    isegIoc_DBD += calc.dbd
+    isegIoc_LIBS += calc
+endif
+
+# isegIoc_registerRecordDeviceDriver.cpp derives from isegIoc.dbd
+isegIoc_SRCS += isegIoc_registerRecordDeviceDriver.cpp
+
+# Build the main IOC entry point on workstation OSs.
+isegIoc_SRCS_DEFAULT += isegIocMain.cpp
+isegIoc_SRCS_vxWorks += -nil-
+
+# Link QSRV (pvAccess Server) if available
+ifdef EPICS_QSRV_MAJOR_VERSION
+    isegIoc_LIBS += qsrv
+    isegIoc_LIBS += $(EPICS_BASE_PVA_CORE_LIBS)
+    isegIoc_DBD += PVAServerRegister.dbd
+    isegIoc_DBD += qsrv.dbd
+endif
+
+isegIoc_LIBS += $(EPICS_BASE_IOC_LIBS)
 
 #===========================
 

@@ -20,41 +20,41 @@
 
 record( stringin, "ISEG:${CONTROLLER_SN}:Status" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@Status can0" )	
+  field( INP,  "@Status $(port)" )	
   field( FLNK, "ISEG:${CONTROLLER_SN}:BitRate" )
   field( TSE,  "-2" )
 }
 
 record( longin, "ISEG:${CONTROLLER_SN}:BitRate" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@BitRate can0" )
+  field( INP,  "@BitRate $(port)" )
   field( TSE,  "-2" )
 }	
 
 record( longin, "ISEG:${CONTROLLER_SN}:ModuleNumber" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@ModuleNumber can0" )
+  field( INP,  "@ModuleNumber $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:CrateNumber" )
   field( TSE,  "-2" )
 }
 
 record( longin, "ISEG:${CONTROLLER_SN}:CrateNumber" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@CrateNumber can0" )
+  field( INP,  "@CrateNumber $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:CrateList" )
   field( TSE,  "-2" )
 }
 
 record( stringin, "ISEG:${CONTROLLER_SN}:CrateList" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@CrateList can0" )
+  field( INP,  "@CrateList $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:CycleCounter" )
   field( TSE,  "-2" )
 }
 
 record( longin, "ISEG:${CONTROLLER_SN}:CycleCounter" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@CycleCounter can0" )
+  field( INP,  "@CycleCounter $(port)" )
   field( TSE,  "-2" )
 }
 
@@ -64,41 +64,41 @@ record( longin, "ISEG:${CONTROLLER_SN}:CycleCounter" ) {
 
 record( stringin, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:Status" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.Status can0" )
+  field( INP,  "@${CAN_LINE}.Status $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:BitRate" )
   field( TSE,  "-2" )
 }
 
 record( longin, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:BitRate" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.BitRate can0" )
+  field( INP,  "@${CAN_LINE}.BitRate $(port)" )
   field( TSE,  "-2" )
 }
 
 record( longin, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:ModuleNumber" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.ModuleNumber can0" )
+  field( INP,  "@${CAN_LINE}.ModuleNumber $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:ModuleList" )
   field( TSE,  "-2" )
 }
 
 record( stringin, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:ModuleList" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.ModuleList can0" )
+  field( INP,  "@${CAN_LINE}.ModuleList $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:CrateNumber" )
   field( TSE,  "-2" )
 }
 
 record( longin, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:CrateNumber" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.CrateNumber can0" )
+  field( INP,  "@${CAN_LINE}.CrateNumber $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:CrateList" )
   field( TSE,  "-2" )
 }
 
 record( stringin, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:CrateList" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.CrateList can0" )
+  field( INP,  "@${CAN_LINE}.CrateList $(port)" )
   field( TSE,  "-2" )
 }
 
@@ -109,7 +109,7 @@ record( stringin, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:CrateList" ) {
 record( mbbiDirect, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:StatusLow" ) {
   field( DESC, "Lower 16 bit of module status register" )
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${DEVICE_ID}.Status can0" )
+  field( INP,  "@${CAN_LINE}.${DEVICE_ID}.Status $(port)" )
   field( NOBT, "16" )
   field( SHFT, "0" )
   field( TSE,  "-2" )
@@ -118,7 +118,7 @@ record( mbbiDirect, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:StatusLow" )
 record( mbbiDirect, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:StatusHigh" ) {
   field( DESC, "Upper 16 bit of module status register" )
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${DEVICE_ID}.Status can0" )
+  field( INP,  "@${CAN_LINE}.${DEVICE_ID}.Status $(port)" )
   field( NOBT, "16" )
   field( SHFT, "16" )  ## shift the value by 16 bits to the right
   field( TSE,  "-2" )
@@ -129,7 +129,7 @@ record( mbbiDirect, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:StatusHigh" 
 
 #record( longin, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:StatusRead__" ) {
 #  field( DTYP, "isegHAL" )
-#  field( INP,  "@${CAN_LINE}.${DEVICE_ID}.Status can0" )
+#  field( INP,  "@${CAN_LINE}.${DEVICE_ID}.Status $(port)" )
 #}
 #record( calc, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:StatusSplit__" ) {
 #  ## PP = Passive Process: Force the other record to process before sending the value
@@ -153,7 +153,7 @@ record( mbbiDirect, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:StatusHigh" 
 
 record( mbbiDirect, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:EventStatusLow" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${DEVICE_ID}.EventStatus can0" )
+  field( INP,  "@${CAN_LINE}.${DEVICE_ID}.EventStatus $(port)" )
   field( NOBT, "16" )
   field( SHFT, "0" )
   field( TSE,  "-2" )
@@ -161,25 +161,25 @@ record( mbbiDirect, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:EventStatusL
 
 record( mbbiDirect, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:EventStatusHigh" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${DEVICE_ID}.EventStatus can0" )
+  field( INP,  "@${CAN_LINE}.${DEVICE_ID}.EventStatus $(port)" )
   field( NOBT, "16" )
   field( SHFT, "16" )
   field( TSE,  "-2" )
 }
 record( longout, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:EventMask" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${DEVICE_ID}.EventMask can0" )
+  field( OUT,  "@${CAN_LINE}.${DEVICE_ID}.EventMask $(port)" )
   field( TSE,  "-2" )
 }
 record( ai, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:FanSpeed" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${DEVICE_ID}.FanSpeed can0" )
+  field( INP,  "@${CAN_LINE}.${DEVICE_ID}.FanSpeed $(port)" )
   field( TSE,  "-2" )
 }
 
 record( bo, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:Control:doClear" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${DEVICE_ID}.Control:0 can0" )
+  field( OUT,  "@${CAN_LINE}.${DEVICE_ID}.Control:0 $(port)" )
   field( ZNAM, "" )
   field( ONAM, "doClear" )
   field( TSE,  "-2" )
@@ -188,13 +188,13 @@ record( bo, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:Control:doClear" ) {
 
 record( longin, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:SerialNumber" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${DEVICE_ID}.SerialNumber can0" )
+  field( INP,  "@${CAN_LINE}.${DEVICE_ID}.SerialNumber $(port)" )
   field( TSE,  "-2" )
 }
 
 record( bo, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:PowerOn" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${DEVICE_ID}.PowerOn can0" )
+  field( OUT,  "@${CAN_LINE}.${DEVICE_ID}.PowerOn $(port)" )
   field( TSE,  "-2" )
   field( ZNAM, "Off" )
   field( ONAM, "On" )
@@ -202,21 +202,21 @@ record( bo, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:PowerOn" ) {
 
 record( stringin, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:FirmwareRelease" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${DEVICE_ID}.FirmwareRelease can0" )
+  field( INP,  "@${CAN_LINE}.${DEVICE_ID}.FirmwareRelease $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:FirmwareName" )
   field( TSE,  "-2" )
 }
 
 record( stringin, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:FirmwareName" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${DEVICE_ID}.FirmwareName can0" )
+  field( INP,  "@${CAN_LINE}.${DEVICE_ID}.FirmwareName $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:Article" )
   field( TSE,  "-2" )
 }
 
 record( stringin, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:Article" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${DEVICE_ID}.Article can0" )
+  field( INP,  "@${CAN_LINE}.${DEVICE_ID}.Article $(port)" )
   field( TSE,  "-2" )
 }
 
@@ -230,7 +230,7 @@ record( mbbiDirect, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status" ) {
   field( DTYP, "isegHAL" )
   field( DISV, "0" )  ## Disable Value (if value linked by SDIS == DISV record is disabled)
   field( SDIS, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:PowerOn.VAL NPP MS" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.Status can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.Status $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:StatusHigh" ) ## Build read out chains
   field( TSE,  "-2" )
 }
@@ -240,7 +240,7 @@ record( mbbiDirect, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:StatusLow" )
   field( DTYP, "isegHAL" )
   field( DISV, "0" )  ## Disable Value (if value linked by SDIS == DISV record is disabled)
   field( SDIS, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:PowerOn.VAL NPP MS" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.Status can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.Status $(port)" )
   field( NOBT, "16" )
   field( SHFT, "0" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:StatusHigh" ) ## Build read out chains
@@ -252,7 +252,7 @@ record( mbbiDirect, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:StatusHigh" 
   field( DTYP, "isegHAL" )
   field( DISV, "0" )  ## Disable Value (if value linked by SDIS == DISV record is disabled)
   field( SDIS, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${DEVICE_ID}:PowerOn.VAL NPP MS" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.Status can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.Status $(port)" )
   field( NOBT, "16" )
   field( SHFT, "16" )  ## shift the value by 16 bits to the right
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventStatus" ) ## Build read out chains
@@ -261,20 +261,20 @@ record( mbbiDirect, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:StatusHigh" 
 
 record( mbbiDirect, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventStatus" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.EventStatus can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.EventStatus $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventMask" )
   field( TSE,  "-2" )
 }
 record( longout, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventMask" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.EventMask can0" )
+  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.EventMask $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Temperature" )
   field( TSE,  "-2" )
 }
 
 record( bo, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Control:doClear" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.Control:6 can0" )
+  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.Control:6 $(port)" )
   field( ZNAM, "" )
   field( ONAM, "doClear" )
   field( TSE,  "-2" )
@@ -282,7 +282,7 @@ record( bo, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Control:doClear" ) {
 
 record( bo, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Control:setFineAdjustment" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.Control:12 can0" )
+  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.Control:12 $(port)" )
   field( ZNAM, "FineAdjustment off" )
   field( ONAM, "FineAdjustment on" )
   field( TSE,  "-2" )
@@ -290,7 +290,7 @@ record( bo, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Control:setFineAdjus
 
 record( bo, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Control:setKillEnable" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.Control:14 can0" )
+  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.Control:14 $(port)" )
   field( ZNAM, "KillEnable off" )
   field( ONAM, "KillEnable on" )
   field( TSE,  "-2" )
@@ -298,7 +298,7 @@ record( bo, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Control:setKillEnabl
 
 record( bo, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Control:disableVoltageRampSpeedLimit" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.Control:16 can0" )
+  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.Control:16 $(port)" )
   field( ZNAM, "VoltageRampLimit enable" )
   field( ONAM, "VoltageRampLimit disable" )
   field( TSE,  "-2" )
@@ -306,79 +306,79 @@ record( bo, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Control:disableVolta
 
 record( ao, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:VoltageRampSpeed" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.VoltageRampSpeed can0" )
+  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.VoltageRampSpeed $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:CurrentRampSpeed" )
   field( TSE,  "-2" )
 }
 
 record( ao, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:CurrentRampSpeed" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.CurrentRampSpeed can0" )
+  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.CurrentRampSpeed $(port)" )
   field( TSE,  "-2" )
 }
 
 record( ai, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:VoltageLimit" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.VoltageLimit can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.VoltageLimit $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:CurrentLimit" )
   field( TSE,  "-2" )
 }
 
 record( ai, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:CurrentLimit" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.CurrentLimit can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.CurrentLimit $(port)" )
   field( TSE,  "-2" )
 }
 
 record( ai, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Temperature" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.Temperature can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.Temperature $(port)" )
   field( TSE,  "-2" )
 }
 
 record( longin, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:SerialNumber" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.SerialNumber can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.SerialNumber $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:ChannelNumber" )
   field( TSE,  "-2" )
 }
 
 record( longin, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:ChannelNumber" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.ChannelNumber can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.ChannelNumber $(port)" )
   field( TSE,  "-2" )
 }
 
 record( longin, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:SampleRate" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.SampleRate can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.SampleRate $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:DigitalFilter" )
   field( TSE,  "-2" )
 }
 
 record( longin, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:DigitalFilter" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.DigitalFilter can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.DigitalFilter $(port)" )
   field( TSE,  "-2" )
 }
 
 record( stringin, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:FirmwareRelease" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.FirmwareRelease can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.FirmwareRelease $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:FirmwareName" )
   field( TSE,  "-2" )
 }
 
 record( stringin, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:FirmwareName" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.FirmwareName can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.FirmwareName $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Article" )
   field( TSE,  "-2" )
 }
 
 record( stringin, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Article" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.Article can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.Article $(port)" )
   field( TSE,  "-2" )
 }
 
@@ -387,7 +387,7 @@ record( stringin, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Article" ) {
 #####################################
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:isAdjustment" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.B0 can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.B0 CP" )
   field( ZNAM, "off" )
   field( ONAM, "on" )
   field( ZSV,  "NO_ALARM" )
@@ -395,7 +395,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:isAdjustment" ) {
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status:isLiveInsertion" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.B2 can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.B2 CP" )
   field( ZNAM, "off" )
   field( ONAM, "on" )
   field( ZSV,  "NO_ALARM" )
@@ -403,7 +403,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status:isLiveInserti
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:needService" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.B4 can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.B4 CP" )
   field( ZNAM, "ok" )
   field( ONAM, "Hardware failure detected" )
   field( ZSV,  "NO_ALARM" )
@@ -411,7 +411,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:needService" ) {
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:isInputError" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.B6 CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.B6 CP" )
   field( ZNAM, "ok" )
   field( ONAM, "Error" )
   field( ZSV,  "NO_ALARM" )
@@ -419,7 +419,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:isInputError" ) {
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:isNoSumError" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.B8 CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.B8 CP" )
   field( ZNAM, "Error" )
   field( ONAM, "ok" )
   field( ZSV,  "MAJOR" )
@@ -427,7 +427,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:isNoSumError" ) {
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:isNoRamp" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.B9 CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.B9 CP" )
   field( ZNAM, "channel is ramping" )
   field( ONAM, "all channels stable" )
   field( ZSV,  "NO_ALARM" )
@@ -435,7 +435,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:isNoRamp" ) {
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:isSafetyLoopGood" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.BA CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.BA CP" )
   field( ZNAM, "broken" )
   field( ONAM, "closed" )
   field( ZSV,  "MAJOR" )
@@ -443,7 +443,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:isSafetyLoopGood" ) 
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:isEVentActive" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.BB CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.BB CP" )
   field( ZNAM, "no active Event" )
   field( ONAM, "any event active" )
   field( ZSV,  "NO_ALARM" )
@@ -451,7 +451,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:isEVentActive" ) {
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:isModuleGood" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.BC CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.BC CP" )
   field( ZNAM, "failure" )
   field( ONAM, "ok" )
   field( ZSV,  "MAJOR" )
@@ -459,7 +459,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:isModuleGood" ) {
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:isSuppliesGodd" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.BD CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.BD CP" )
   field( ZNAM, "Out of Range" )
   field( ONAM, "ok" )
   field( ZSV,  "MAJOR" )
@@ -467,7 +467,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:isSuppliesGodd" ) {
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:isTemperatureGood" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.BE CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.BE CP" )
   field( ZNAM, "above 55 degC" )
   field( ONAM, "within range" )
   field( ZSV,  "MAJOR" )
@@ -475,7 +475,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:isTemperatureGood" )
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:isKillEnable" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.BF can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:Status.BF" )
   field( ZNAM, "disabled" )
   field( ONAM, "enabled" )
   field( ZSV,  "NO_ALARM" )
@@ -486,7 +486,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:isKillEnable" ) {
 # ### Decoding of Module Event Status ### #
 ###########################################
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventLiveInsertion" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventStatus.B2 CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventStatus.B2 CP" )
   field( ZNAM, "off" )
   field( ONAM, "on" )
   field( ZSV,  "NO_ALARM" )
@@ -494,7 +494,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventLiveInsertion" 
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventService" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventStatus.B4 CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventStatus.B4 CP" )
   field( ZNAM, "-" )
   field( ONAM, "Hardware failure detected" )
   field( ZSV,  "NO_ALARM" )
@@ -502,7 +502,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventService" ) {
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventInputError" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventStatus.B6 CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventStatus.B6 CP" )
   field( ZNAM, "-" )
   field( ONAM, "Input Error in connection" )
   field( ZSV,  "NO_ALARM" )
@@ -510,7 +510,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventInputError" ) {
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventSafetyLoopNotGood" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventStatus.BA CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventStatus.BA CP" )
   field( ZNAM, "-" )
   field( ONAM, "Safety loop open" )
   field( ZSV,  "NO_ALARM" )
@@ -518,7 +518,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventSafetyLoopNotGo
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventSuppliesNotGood" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventStatus.BD CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventStatus.BD CP" )
   field( ZNAM, "-" )
   field( ONAM, "Supply is not good" )
   field( ZSV,  "NO_ALARM" )
@@ -526,7 +526,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventSuppliesNotGood
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventTemperatureNotGood" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventStatus.BD CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventStatus.BD CP" )
   field( ZNAM, "-" )
   field( ONAM, "Temperature above 55 degC" )
   field( ZSV,  "NO_ALARM" )
@@ -539,77 +539,77 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:EventTemperatureNotG
 
 record( ao, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:VoltageSet" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.VoltageSet can0" )
+  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.VoltageSet $(port)" )
   field( TSE,  "-2" )
 }
 
 record( ao, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:CurrentSet" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.CurrentSet can0" )
+  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.CurrentSet $(port)" )
   field( TSE,  "-2" )
 }
 
 record( ai, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:VoltageMeasure" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.VoltageMeasure can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.VoltageMeasure $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:CurrentMeasure" )
   field( TSE,  "-2" )
 }
 
 record( ai, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:CurrentMeasure" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.CurrentMeasure can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.CurrentMeasure $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status" )
   field( TSE,  "-2" )
 }
 
 record( ao, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:VoltageBounds" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.VoltageBounds can0" )
+  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.VoltageBounds $(port)" )
   field( TSE,  "-2" )
 }
 
 record( ao, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:CurrentBounds" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.CurrentBounds can0" )
+  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.CurrentBounds $(port)" )
   field( TSE,  "-2" )
 }
 
 record( ai, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:VoltageNominal" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.VoltageNominal can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.VoltageNominal $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:CurrentNominal" )
   field( TSE,  "-2" )
 }
 
 record( ai, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:CurrentNominal" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.CurrentNominal can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.CurrentNominal $(port)" )
   field( TSE,  "-2" )
 }
 
 record( ai, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:TemperatureExternal" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.TemperatureExternal can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.TemperatureExternal $(port)" )
   field( TSE,  "-2" )
 }
 
 record( ao, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:VctCoefficient" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.VctCoefficient can0" )
+  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.VctCoefficient $(port)" )
   field( TSE,  "-2" )
 }
 
 record( mbbiDirect, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.Status can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.Status $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus" )
   field( TSE,  "-2" )
 }
 
 record( bo, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Control:setOn" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.Control:3 can0" )
+  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.Control:3 $(port)" )
   field( ZNAM, "Channel off" )
   field( ONAM, "Channel on" )
   field( TSE,  "-2" )
@@ -617,7 +617,7 @@ record( bo, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Contro
 
 record( bo, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Control:setEmergency" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.Control:5 can0" )
+  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.Control:5 $(port)" )
   field( ZNAM, "" )
   field( ONAM, "Set EMCY" )
   field( TSE,  "-2" )
@@ -625,32 +625,32 @@ record( bo, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Contro
 
 record( mbbiDirect, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus" ) {
   field( DTYP, "isegHAL" )
-  field( INP,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.EventStatus can0" )
+  field( INP,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.EventStatus $(port)" )
   field( TSE,  "-2" )
 }
 
 record( longout, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventMask" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.EventMask can0" )
+  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.EventMask $(port)" )
   field( TSE,  "-2" )
 }
 
 record( longout, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:DelayedTripAction" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.DelayedTripAction can0" )
+  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.DelayedTripAction $(port)" )
   field( FLNK, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:DelayedTripTime" )
   field( TSE,  "-2" )
 }
 
 record( ao, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:DelayedTripTime" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.DelayedTripTime can0" )
+  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.DelayedTripTime $(port)" )
   field( TSE,  "-2" )
 }
 
 record( longout, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:ExternalInhibitAction" ) {
   field( DTYP, "isegHAL" )
-  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.ExternalInhibitAction can0" )
+  field( OUT,  "@${CAN_LINE}.${MODULE_ID}.${CHANNEL_ID}.ExternalInhibitAction $(port)" )
   field( TSE,  "-2" )
 }
 
@@ -658,7 +658,7 @@ record( longout, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:E
 # ### Decoding of Channel Status ### #
 ######################################
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:InputError" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.B2 CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.B2 CP" )
   field( ZNAM, "OK" )
   field( ONAM, "Input Error" )
   field( ZSV,  "NO_ALARM" )
@@ -666,7 +666,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:InputE
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isOn" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.B3 CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.B3 CP" )
   field( ZNAM, "off" )
   field( ONAM, "on" )
   field( ZSV,  "NO_ALARM" )
@@ -674,7 +674,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isOn" 
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isVoltageRamp" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.B4 CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.B4 CP" )
   field( ZNAM, "stable" )
   field( ONAM, "ramping" )
   field( ZSV,  "NO_ALARM" )
@@ -682,7 +682,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isVolt
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isEmergency" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.B5 CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.B5 CP" )
   field( ZNAM, "-" )
   field( ONAM, "active" )
   field( ZSV,  "NO_ALARM" )
@@ -690,7 +690,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isEmer
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isCC" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.B6 CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.B6 CP" )
   field( ZNAM, "-" )
   field( ONAM, "active" )
   field( ZSV,  "NO_ALARM" )
@@ -698,7 +698,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isCC" 
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isCV" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.B7 CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.B7 CP" )
   field( ZNAM, "-" )
   field( ONAM, "active" )
   field( ZSV,  "NO_ALARM" )
@@ -706,7 +706,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isCV" 
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isCurrentBound" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.BA CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.BA CP" )
   field( ZNAM, "OK" )
   field( ONAM, "Out of bounds" )
   field( ZSV,  "NO_ALARM" )
@@ -714,7 +714,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isCurr
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isVoltageBound" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.BB CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.BB CP" )
   field( ZNAM, "OK" )
   field( ONAM, "Out of bounds" )
   field( ZSV,  "NO_ALARM" )
@@ -722,7 +722,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isVolt
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isEventInhibit" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.BC CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.BC CP" )
   field( ZNAM, "no" )
   field( ONAM, "yes" )
   field( ZSV,  "NO_ALARM" )
@@ -730,7 +730,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isEven
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isTrip" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.BD CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.BD CP" )
   field( ZNAM, "OK" )
   field( ONAM, "tripped" )
   field( ZSV,  "NO_ALARM" )
@@ -738,7 +738,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isTrip
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isCurrentLimit" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.BE CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.BE CP" )
   field( ZNAM, "OK" )
   field( ONAM, "exceeded" )
   field( ZSV,  "NO_ALARM" )
@@ -746,7 +746,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isCurr
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isVoltageLimit" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.BF CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:Status.BF CP" )
   field( ZNAM, "OK" )
   field( ONAM, "exceeded" )
   field( ZSV,  "NO_ALARM" )
@@ -757,7 +757,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:isVolt
 # ### Decoding of Channel Event Status ### #
 ############################################
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventInputError" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.B2 CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.B2 CP" )
   field( ZNAM, "--" )
   field( ONAM, "active" )
   field( ZSV,  "NO_ALARM" )
@@ -765,7 +765,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventI
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EOn2Off" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.B3 CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.B3 CP" )
   field( ZNAM, "--" )
   field( ONAM, "active" )
   field( ZSV,  "NO_ALARM" )
@@ -773,7 +773,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EOn2Of
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventEndOfRamp" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.B4 CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.B4 CP" )
   field( ZNAM, "--" )
   field( ONAM, "active" )
   field( ZSV,  "NO_ALARM" )
@@ -781,7 +781,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventE
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventEmergency" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.B5 CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.B5 CP" )
   field( ZNAM, "--" )
   field( ONAM, "active" )
   field( ZSV,  "NO_ALARM" )
@@ -789,7 +789,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventE
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:ECC" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.B6 CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.B6 CP" )
   field( ZNAM, "--" )
   field( ONAM, "active" )
   field( ZSV,  "NO_ALARM" )
@@ -797,7 +797,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:ECC" )
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:ECV" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.B7 CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.B7 CP" )
   field( ZNAM, "--" )
   field( ONAM, "active" )
   field( ZSV,  "NO_ALARM" )
@@ -805,7 +805,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:ECV" )
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:ECurrentBounds" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.BA CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.BA CP" )
   field( ZNAM, "--" )
   field( ONAM, "active" )
   field( ZSV,  "NO_ALARM" )
@@ -813,7 +813,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:ECurre
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EVVoltageBounds" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.BB CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.BB CP" )
   field( ZNAM, "--" )
   field( ONAM, "active" )
   field( ZSV,  "NO_ALARM" )
@@ -821,7 +821,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EVVolt
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventExternalInhibit" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.BC CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.BC CP" )
   field( ZNAM, "--" )
   field( ONAM, "active" )
   field( ZSV,  "NO_ALARM" )
@@ -829,7 +829,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventE
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventTrip" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.BD CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.BD CP" )
   field( ZNAM, "--" )
   field( ONAM, "active" )
   field( ZSV,  "NO_ALARM" )
@@ -837,7 +837,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventT
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventCurrentLimit" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.BE CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.BE CP" )
   field( ZNAM, "--" )
   field( ONAM, "active" )
   field( ZSV,  "NO_ALARM" )
@@ -845,7 +845,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventC
 }
 
 record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventVoltageLimit" ) {
-  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.BF CP can0" )
+  field( INP,  "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventStatus.BF CP" )
   field( ZNAM, "--" )
   field( ONAM, "active" )
   field( ZSV,  "NO_ALARM" )
@@ -857,7 +857,7 @@ record( bi, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:${MODULE_ID}:${CHANNEL_ID}:EventV
 #########################################################################################
 record( bo, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:GlobalOnOff" ) {
   field( DTYP, "isegHALglobal" )
-  field( OUT,  "@OnOff can0" )
+  field( OUT,  "@OnOff $(port)" )
   field( TSE,  "-2" )
   field( ZNAM, "Off" )
   field( ONAM, "On" )
@@ -865,7 +865,7 @@ record( bo, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:GlobalOnOff" ) {
 
 record( bo, "ISEG:${CONTROLLER_SN}:${CAN_LINE}:GlobalEmergency" ) {
   field( DTYP, "isegHALglobal" )
-  field( OUT,  "@Emergency can0" )
+  field( OUT,  "@Emergency $(port)" )
   field( TSE,  "-2" )
   field( ZNAM, "Off" )
   field( ONAM, "EMCY" )

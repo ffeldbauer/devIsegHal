@@ -128,7 +128,6 @@ isegHalConnectionHandler& isegHalConnectionHandler::instance() {
 //------------------------------------------------------------------------------
 bool isegHalConnectionHandler::connect( std::string const& name, std::string const& interface ) {
   std::vector< std::string >::iterator it;
-
   it = std::find( _interfaces.begin(), _interfaces.end(), name );
   if( it != _interfaces.end() ) return true;
 
@@ -136,15 +135,16 @@ bool isegHalConnectionHandler::connect( std::string const& name, std::string con
 
   IsegResult status = iseg_connect( name.c_str(), interface.c_str(), NULL );
   if ( ISEG_OK != status ) {
-    std::cerr << "\033[31;1m Cannot connect to isegHAL interface '"
-              << interface << "': "
+    std::cerr << "\033[31;1mCannot connect to isegHAL interface '"
+              << interface << "', result: "
+              << statsus << ", "
               << strerror( errno )
-              << "\033[0m"
+              << "(" << errno << ")\033[0m"
               << std::endl;
     return false;
   }
   // iseg HAL starts collecting data from hardware after connect.
-  // wait 5 secs to let alle values 'initialize'
+  // wait 5 secs to let all values 'initialize'
   sleep( 5 ); 
 
   _interfaces.push_back( interface );
@@ -156,6 +156,8 @@ bool isegHalConnectionHandler::connect( std::string const& name, std::string con
 //! @param [in]  name    deviseg internal name of the interface handle
 //------------------------------------------------------------------------------
 bool isegHalConnectionHandler::connected( std::string const& name ) {
+  if( name.compare( "AUTO" ) == 0 ) return true;
+
   std::vector< std::string >::iterator it;
   it = std::find( _interfaces.begin(), _interfaces.end(), name );
   if( it != _interfaces.end() ) return true;
