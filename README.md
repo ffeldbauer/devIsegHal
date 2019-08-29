@@ -1,6 +1,6 @@
 # EPICS Device Support for iseg Hardware Abstraction Layer
 
-## Introduciton
+## Introduction
 The isegHAL library offers a string based application interface - API. The data
 collection from the iseg high voltage modules is done in background. All
 communication hand shake is handled by the isegHAL.
