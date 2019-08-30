@@ -10,10 +10,18 @@ within your EPICS applicaitons.
 
 ## Build
 Set pathes to `EPICS_BASE` and `ISEGHAL` in `configure/RELEASE.local`.
+The header files from isegHAL are searched in `$ISEGHAL` and `$ISEGHAL/include`,
+the shared object files in `$ISEGHAL` and `$ISEGHAL/lib`.
 
 If the variable `CHECK_TIMESTAMPS` is defined in `configure/RELEASE.local`
 the device support will check if the isegHAL has updated the corresponding value
 within the last 30 seconds. If not the record is set to a TIMEOUT_ALARM.
+
+### Cross compiling
+If you want to cross compile the devIsegHal module, the `ISEGHAL` variable should
+not be defined in `configure/RELEASE.local`. Instead only define `EPICS_BASE` in
+this file. `ISEGHAL` should be defined in `configure/RELEASE.Common.{T_A}` where
+`{T_A}` stands for the target architecture (e.g. linux-arm).
 
 ## Usage
 ### Connect to an interface with the isegHalServer

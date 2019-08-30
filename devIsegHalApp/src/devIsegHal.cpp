@@ -88,6 +88,20 @@ double timespec_diff( const struct timespec * stop, const struct timespec * star
   return nSeconds + ( nNSec / 1.0e9 );
 }
 
+static std::ostream& operator<<( std::ostream& ost, const IsegResult& result ) {
+  switch( result ) {
+    case ISEG_OK:                  ost << "ISEG_OK";                  break;
+    case ISEG_ERROR:               ost << "ISEG_ERROR";               break;
+    case ISEG_WRONG_SESSION_NAME:  ost << "ISEG_WRONG_SESSION_NAME";  break;
+    case ISEG_WRONG_USER:          ost << "ISEG_WRONG_USER";          break;
+    case ISEG_WRONG_PASSWORD:      ost << "ISEG_WRONG_PASSWORD";      break;
+    case ISEG_NOT_AUTHORIZED:      ost << "ISEG_NOT_AUTHORIZED";      break;
+    case ISEG_NO_SSL_SUPPORT:      ost << "ISEG_NO_SSL_SUPPORT";      break;
+    default:                       ost << (int)result;
+  }
+  return ost;
+}
+
 //------------------------------------------------------------------------------
 //! @brief       D'tor of class isegHalConnectionHandler
 //!
@@ -127,6 +141,7 @@ isegHalConnectionHandler& isegHalConnectionHandler::instance() {
 //! @return      true if interface is already connected or if successfully connected
 //------------------------------------------------------------------------------
 bool isegHalConnectionHandler::connect( std::string const& name, std::string const& interface ) {
+
   std::vector< std::string >::iterator it;
   it = std::find( _interfaces.begin(), _interfaces.end(), name );
   if( it != _interfaces.end() ) return true;
@@ -135,11 +150,9 @@ bool isegHalConnectionHandler::connect( std::string const& name, std::string con
 
   IsegResult status = iseg_connect( name.c_str(), interface.c_str(), NULL );
   if ( ISEG_OK != status ) {
-    std::cerr << "\033[31;1mCannot connect to isegHAL interface '"
-              << interface << "', result: "
-              << statsus << ", "
-              << strerror( errno )
-              << "(" << errno << ")\033[0m"
+    std::cerr << "\033[31;1mCannot connect to isegHAL interface '" << interface << "'\n"
+              << "  Result: " << status
+              << ", Error: " << strerror( errno ) << "(" << errno << ")\033[0m"
               << std::endl;
     return false;
   }

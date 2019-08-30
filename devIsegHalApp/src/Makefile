@@ -8,8 +8,8 @@ devIsegHal_SYS_LIBS += isegHAL-client
 isegIoc_SYS_LIBS += isegHAL-client
 
 ifneq ($(ISEGHAL),)
-    USR_INCLUDES += -I$(ISEGHAL)
-    USR_LDFLAGS  += -L$(ISEGHAL)
+    USR_INCLUDES += -I$(ISEGHAL) -I$(ISEGHAL)/include
+    USR_LDFLAGS  += -L$(ISEGHAL) -L$(ISEGHAL)/lib
 endif
 ifneq ($(CHECK_TIMESTAMPS),)
     USR_CXXFLAGS += -DCHECK_LAST_REFRESHED

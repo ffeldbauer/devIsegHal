@@ -1,0 +1,12 @@
+RELEASE.local
+RELEASE.Common.*
+CONFIG_SITE.local
+bin/
+lib/
+dbd/
+db/
+O.linux-*/
+O.Common/
+
+.*.swp
+
