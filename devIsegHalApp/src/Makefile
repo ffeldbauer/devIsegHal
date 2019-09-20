@@ -53,7 +53,7 @@ isegIoc_DBD += devIsegHal.dbd
 isegIoc_LIBS += devIsegHal
 
 ifneq ($(AUTOSAVE),)
-    isegIoc_DBD += as.dbd
+    isegIoc_DBD += asSupport.dbd
     isegIoc_LIBS += autosave
 endif
 ifneq ($(CALC),)
