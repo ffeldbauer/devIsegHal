@@ -160,7 +160,7 @@ bool isegHalConnectionHandler::connect( std::string const& name, std::string con
   // wait 5 secs to let all values 'initialize'
   sleep( 5 ); 
 
-  _interfaces.push_back( interface );
+  _interfaces.push_back( name );
   return true;
 }
 
