@@ -82,7 +82,7 @@ epicsExportAddress( dset, devIsegHalAo );
 static long devIsegHalInitRecord_ao( aoRecord *prec ){
   prec->pact = (epicsUInt8)true; /* disable record */
 
-  devIsegHal_rec_t conf = { &prec->out, "WR", "R4", true };
+  devIsegHal_rec_t conf = { &prec->out, "WR", "R4", false };
   long status = devIsegHalInitRecord( (dbCommon*)prec, &conf );
   if( status != 0 ) return ERROR;
 
